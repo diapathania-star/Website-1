@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — The Perception Studio</title>
+  <meta name="description" content="Perception Architecture by TPS — identity, meaning, and narrative as systems of influence.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Source+Sans+3:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+
+<main id="about">
+
+  <!-- ========== HERO (white, image right) ========== -->
+  <section id="hero" class="section hero" role="banner">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <h1 class="hero__title">
+          Perception Architecture is the art and system of shaping how the world sees you — by first aligning how you see yourself.
+        </h1>
+        <p class="hero__sub">
+          We design identity, meaning, and narrative as systems of influence.
+        </p>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <figure class="hero__photo">
+          <img src="assets/cloud.jpeg" alt="" loading="eager" decoding="async">
+        </figure>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span>Scroll to see how it works</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="chev">
+        <path d="M6 9l6 6 6-6" stroke="#2E2E2E" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ========== PHILOSOPHY ========== -->
+  <section id="philosophy" class="section">
+    <div class="container two-col">
+      <div>
+        <h2 class="section-title">Our Philosophy</h2>
+        <p class="lead">
+          People don’t act from logic — they act from perception. And perception is shaped by symbols, story, memory, and emotion.
+        </p>
+        <p><strong>This isn’t branding.</strong> It’s the engineering of reality through intentional perception.</p>
+      </div>
+
+      <!-- simple line diagram (no circles) -->
+      <div class="diagram" aria-hidden="true">
+        <div class="diagram__row">
+          <span class="tag">Symbols</span>
+          <span class="arrow">→</span>
+          <span class="tag">Perception</span>
+          <span class="arrow">→</span>
+          <span class="tag">Behavior</span>
+          <span class="arrow">→</span>
+          <span class="tag">Outcomes</span>
+        </div>
+        <p class="diagram__note">Design the perception, and behavior follows.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== APPROACH (3 pillars) ========== -->
+  <section id="approach" class="section">
+    <div class="container">
+      <h2 class="section-title center">Our Approach</h2>
+      <p class="center subtext">
+        We build powerful, aspirational identities that create alignment, trust, and cultural gravity.
+      </p>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3>Behavioral clarity</h3>
+          <p>Actions that match intentions across moments, channels, and stakeholders.</p>
+          <ul class="bullet">
+            <li>Operating principles</li>
+            <li>Decision cues</li>
+            <li>Visible rituals</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Narrative precision</h3>
+          <p>The right story, told the right way, to the right people.</p>
+          <ul class="bullet">
+            <li>Positioning statements</li>
+            <li>Story arcs &amp; proofs</li>
+            <li>Message kits</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Symbolic depth</h3>
+          <p>Language and design that leave a mark and become memory.</p>
+          <ul class="bullet">
+            <li>Signature phrases</li>
+            <li>Visual motifs</li>
+            <li>Contextual cues</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROMISE ========== -->
+  <section id="promise" class="section">
+    <div class="container narrow">
+      <h2 class="section-title center">Our Promise</h2>
+      <p class="promise">
+        It feels like finally being seen in the way you always hoped to be — but couldn’t yet become. It’s not about mass visibility. It’s about resonance — becoming so coherent that the right people recalibrate just by entering your orbit.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section id="cta" class="section">
+    <div class="container center">
+      <h2 class="section-title">Ready to be seen, differently?</h2>
+      <a class="btn lg" href="contact.html">Work with TPS</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Optional tiny reveal -->
+<script src="js/main.js"></script>
+<script>
+  // if you don't already have main.js, this inline is fine
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.section, .hero__photo, .hero__text')
+      .forEach(el => el.classList.add('reveal'));
+  });
+</script>
+</body>
+</html>
