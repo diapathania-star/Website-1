@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Perception Studio — TPS</title>
+
+  <!-- Fonts (Cormorant + Source Sans 3) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/stylesnormal.css">
+</head>
+<body>
+
+  <!-- Header (simple) -->
+  <header class="site-header container" role="banner">
+    <a class="logo" href="index.html" aria-label="Back to gateway">TPS</a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="about.html">About us</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#connect">Contact</a>
+    </nav>
+  </header>
+
+  <main id="content" tabindex="-1">
+
+    <!-- 1) HERO BLOCK -->
+    <section class="block hero container" id="hero">
+      <h1>We design how you’re remembered.</h1>
+      <p class="sub">Perception Architecture for founders, institutions, and emerging voices.</p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#connect">Start here →</a>
+        <a class="link" href="about.html">See how we think →</a>
+      </div>
+
+      <p class="micro">Designed for memory, not noise.</p>
+    </section>
+
+    <!-- 2) ABOUT (TEASER) -->
+    <section class="block block-card container" id="about">
+      <header class="block-head">
+        <h2>Welcome</h2>
+      </header>
+      <p>
+        We don’t create noises; we bring clarity. 
+        <br> TPS aligns your story, proof, and presence so people remember you for the right reasons at the right time.
+      </p>
+      <a class="btn btn-ghost" href="about.html">Read the full story →</a>
+    </section>
+
+    <!-- 3) SERVICES (TEASER) -->
+          <section class="block block-card container" id="services">
+  <header class="block-head">
+    <h2>What We Do</h2>
+  </header>
+
+  <div class="service-grid">
+    <div class="service-card">
+      <h3>Perception Audit</h3>
+      <p>Find the gaps between how you show up and how you’re seen.</p>
+      <a class="btn btn-ghost" href="services.html#audit">See Pricing →</a>
+    </div>
+
+    <div class="service-card">
+      <h3>Narrative Design</h3>
+      <p>Reshape your story, proof, and presence for clarity and pull.</p>
+      <a class="btn btn-ghost" href="services.html#narrative">See Pricing →</a>
+    </div>
+
+    <div class="service-card">
+      <h3>Visibility Engine</h3>
+      <p>PR & LinkedIn systems that build steady credibility.</p>
+      <a class="btn btn-ghost" href="services.html#visibility">See Pricing →</a>
+    </div>
+    </section>
+
+    <!-- (Optional) 3.5) GALLERY TEASER -->
+    <section class="block container" id="gallery">
+      <header class="block-head">
+        <h2>Gallery</h2>
+        <p class="sub">A quiet look at our vibe and outcomes.</p>
+      </header>
+
+      <div class="gallery-grid">
+        <!-- Replace with your real images later -->
+        <figure class="thumb">
+          <a href="assets/TOI.jpg" target="_blank" rel="noopener" aria-label="Open full image">
+          <img src="assets/TOI.jpg" alt="Case snapshot 1" loading="lazy">
+          </a>
+          <figcaption>caption</figcaption>
+        </figure>
+        <figure class="thumb">
+          <a href="assets/Carousel.jpeg" target="_blank" rel="noopener" aria-label="Open full image">
+          <img src="assets/Carousel.jpeg" alt="Case snapshot 2" loading="lazy">
+          </a>
+          <figcaption>Narrative rewrite for an institution</figcaption>
+        </figure>
+        <figure class="thumb">
+          <a href="assets/Crocodile.jpeg" target="_blank" rel="noopener" aria-label="Open full image">
+          <img src="assets/Crocodile.jpeg" alt="Case snapshot 3" loading="lazy">
+          </a>
+          <figcaption>Visibility engine roll-out</figcaption>
+        </figure>
+        </figure>
+      </div>
+
+      <!-- <a class="link" href="work.html">See more work →</a> -->
+    </section>
+
+    <!-- 4) CONNECT / FORM -->
+    <section class="block block-accent container" id="connect">
+      <header class="block-head">
+        <h2>Let’s talk</h2>
+        <p class="sub">Tell us where you are and what “better remembered” looks like.</p>
+      </header>
+
+      <form class="contact-form" action="https://formspree.io/f/xblabyyn" method="POST">
+    <div class="form-row">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your name" required>
+    </div>
+
+    <div class="form-row">
+      <label for="email">Email</label>
+      <input id="email" name="_replyto" type="email" placeholder="you@example.com" required>
+    </div>
+
+    <div class="form-row">
+      <label for="message">What’s on your mind?</label>
+      <textarea id="message" name="message" rows="5" placeholder="A few lines about your goal"></textarea>
+    </div>
+
+    <!-- Optional spam filter (honeypot) -->
+    <input type="text" name="_gotcha" class="hidden" autocomplete="off">
+
+    <button type="submit" class="btn btn-primary">Send →</button>
+    <p class="micro">We reply within 24–48 hours.</p>
+  </form>
+
+  <!-- Payment note / later link -->
+  <p class="micro">
+    Payments happen only after scope is agreed and confirmed.
+    <a class="link" href="payments.html">Make a payment →</a>
+  </p>
+</section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer container" role="contentinfo">
+    <small>© 2025 The Perception Studio</small>
+    <div class="social-row">
+    <a href="https://instagram.com/theperception.studio" target="_blank" rel="noopener" class="social-col">
+      <img src="assets/Insta.jpg" alt="Instagram" width="28" height="28">
+    </a>
+    <a href="https://www.linkedin.com/company/theperceptionstudio" target="_blank" rel="noopener" class="social-col">
+      <img src="assets/Linkedin.png" alt="LinkedIn" width="28" height="28">
+    </a>
+    <a href="mailto:hello@theperception.studio" target="_blank" rel="noopener" class="social-col">
+      <img src="assets/Email.jpg" alt="Email" width="28" height="28">
+    </a>
+  </div>
+</footer>
+
+  <!-- (No JS needed yet; smooth-scroll etc. can be added later) -->
+</body>
+</html>

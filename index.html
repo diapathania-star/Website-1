@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Perception Studio — Gateway</title>
+  <meta name="description" content="Choose how you experience TPS." />
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main id="gateway" class="container">
+    <h1>Most people don't know when they've already begun.</h1>
+
+    <figure>
+      <img
+        src="assets/hero.jpeg"
+        width="400"
+        height="200"
+        loading="eager"
+      />
+      <figcaption>Beginnings rarely look like beginnings.</figcaption>
+    </figure>
+
+    <h2>Which way do you want to know TPS?</h2>
+
+    <nav aria-label="Choose your route">
+      <a id="route-scenic" href="playful.html">Scenic</a>
+      <a id="route-normal" href="site.html">Normal</a>
+    </nav>
+
+    <!-- 5) Whisper line -->
+    <p class="whisper">Our choice matters the most</p>
+  </main>
+
+  <script>
+    const track = (name, data={}) => {
+      // replace this with Plausible/GA later
+      console.log("Track:", name, data);
+    };
+    document.getElementById('route-scenic')?.addEventListener('click', () => track('Route Chosen', { route: 'scenic' }));
+    document.getElementById('route-normal')?.addEventListener('click', () => track('Route Chosen', { route: 'normal' }));
+  </script>
+</body>
+</html>
