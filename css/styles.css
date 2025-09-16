@@ -2,7 +2,7 @@
 :root{
   --white: #FFFFFF;         
   --ink-navy: #0f1f46;         
-  --text-pastel: #6B8E23;     
+  --text-pastel: #36392f;     
   --link-pastel: #efefef;      
   --link-pastel-hover: #8c97b4;
   --cloud-shadow: rgba(136, 224, 139, 0.212);
@@ -21,7 +21,7 @@ html, body {
 }
 body{
   margin: 0;
-  background: var(--bg-olive);
+  background: var(--white);
   color: var(--text-pastel);
   font: 200 var(--body)/1.6 var(--font-body);
   -webkit-font-smoothing: antialiased;
