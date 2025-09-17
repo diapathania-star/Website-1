@@ -178,36 +178,41 @@ html.night .nighty-cloud-svg{
 .nighty-cloud-svg .eyes{
   transform-box: fill-box;
   transform-origin: center;
-  animation: blink 7s ease-in-out infinite;
+  animation: blink 5s ease-in-out infinite;
 }
 
 /* Z letters inside SVG */
 .nighty-cloud-svg .zzz{
-  fill: #EAE7DF;              /* readable on dark; tweak if needed */
+  fill: #fcfcfc;              /* readable on dark; tweak if needed */
   font-family: 'Source Sans 3', system-ui, sans-serif;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 15px;
   opacity: 0.9;
 }
-.nighty-cloud-svg .z1{ animation: z-float 5.5s ease-in-out infinite; }
-.nighty-cloud-svg .z2{ animation: z-float 6.5s ease-in-out infinite .35s; }
-.nighty-cloud-svg .z3{ animation: z-float 5.0s ease-in-out infinite .7s; }
+.nighty-cloud-svg .z1{ animation: z-float 5s ease-in-out infinite; }
+.nighty-cloud-svg .z2{ animation: z-float 8s ease-in-out infinite .6s; }
+.nighty-cloud-svg .z3{ animation: z-float 10s ease-in-out infinite 1.2s; }
+.nighty-cloud-svg .z4{ animation: z-float 13s ease-in-out infinite 1.4s; }
+.nighty-cloud-svg .z5{ animation: z-float 16s ease-in-out infinite 1.6s; }
 
 /* motions */
-@keyframes cloud-wander{
-  0%   { left: 5vw;  top: 72vh; }
-  25%  { left: 28vw; top: 65vh; }
-  50%  { left: 58vw; top: 70vh; }
-  75%  { left: 34vw; top: 78vh; }
-  100% { left: 5vw;  top: 72vh; }
+@keyframes cloud-wander {
+  0%   { left: 5vw;  top: 70vh; }
+  20%  { left: 70vw; top: 10vh; }
+  40%  { left: 15vw; top: 15vh; }
+  60%  { left: 75vw; top: 80vh; }
+  80%  { left: 30vw; top: 50vh; }
+  100% { left: 5vw;  top: 70vh; }
 }
+
 @keyframes cloud-bob{
   0%,100% { transform: translateY(0); }
   50%     { transform: translateY(-8px); }
 }
-@keyframes z-float{
-  0%   { transform: translateY(0);   opacity: .95; }
-  100% { transform: translateY(-50px); opacity: .75; }
+@keyframes z-float {
+  0%   { transform: translate(0, 0); opacity: .95; }
+  50%  { transform: translate(10px, -50vh); opacity: .6; }
+  100% { transform: translate(-5px, -100vh); opacity: 0; }
 }
 @keyframes blink{
   0%, 96%, 100% { transform: scaleY(1); }
@@ -219,6 +224,8 @@ html.night .nighty-cloud-svg{
   html.night .nighty-cloud-svg{ animation: none; }
   .nighty-cloud-svg .eyes, .nighty-cloud-svg .zzz{ animation: none !important; }
 }
+
+
 
 /* Optional: subtle outline color swap on light theme (if you ever show cloud in day)
    html:not(.night) .nighty-cloud-svg path { stroke: rgba(0,0,0,0.08); } */
