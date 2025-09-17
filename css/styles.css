@@ -171,8 +171,10 @@ html.night .btn-ghost:hover {
 /* show + animate only when .night is on the <html> */
 html.night .nighty-cloud-svg{
   opacity: .95;
-  animation: cloud-wander 60s linear infinite, cloud-bob 5.5s ease-in-out infinite;
+  animation: cloud-wander 120s linear infinite, cloud-bob 7.5s ease-in-out infinite;
+  will-change: left, top, transform;
 }
+
 
 /* eyes blink (subtle) */
 .nighty-cloud-svg .eyes{
