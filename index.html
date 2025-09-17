@@ -42,5 +42,43 @@
     document.getElementById('route-scenic')?.addEventListener('click', () => track('Route Chosen', { route: 'scenic' }));
     document.getElementById('route-normal')?.addEventListener('click', () => track('Route Chosen', { route: 'normal' }));
   </script>
+
+  <!-- cute cloud that only shows at night -->
+<script src="normalJS.js" defer></script>
+<button id="nighty-toggle" class="btn btn-ghost" aria-pressed="false">🌙 Night</button>
+
+<!-- Cute inline SVG cloud (shows only at night) -->
+<svg class="nighty-cloud-svg" aria-hidden="true" width="160" height="110" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cloud shape -->
+  <g class="cloud">
+  <!-- main cloud body -->
+  <path
+    d="M40 80c-14 0-26-10-26-23 0-10 7-19 17-22 2-15 16-27 33-27 14 0 26 8 31 20 2-0.3 4-0.4 6-0.4 16 0 30 12 30 26 0 15-13 27-30 27H40z"
+    fill="#FFFFFF"
+    stroke="rgba(0,0,0,0.25)"
+    stroke-width="2"
+  />
+
+  <!-- softer cheeks moved slightly up -->
+  <circle cx="58" cy="62" r="6" fill="#B8A398" opacity="0.18"/>
+  <circle cx="102" cy="62" r="6" fill="#B8A398" opacity="0.18"/>
+
+  <!-- sleepy eyes moved up by ~5px -->
+  <g class="eyes">
+    <path d="M55 55 q8 10 16 0" fill="none" stroke="rgba(0,0,0,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M89 55 q8 10 16 0" fill="none" stroke="rgba(0,0,0,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- happy smile moved up slightly too -->
+  <path class="smile" d="M72 70 q8 10 16 0" fill="none" stroke="rgba(0,0,0,0.7)" stroke-width="2.8" stroke-linecap="round"/>
+</g>
+
+
+  <!-- Zzz letters -->
+  <text class="zzz z1" x="120" y="25">Z</text>
+  <text class="zzz z2" x="135" y="12">Z</text>
+  <text class="zzz z3" x="145" y="0">Z</text>
+</svg>
+
 </body>
 </html>
