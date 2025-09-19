@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TPS Mycelium — Scenic Route</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/mynetwork.css" />
+</head>
+<body>
+  <header class="page-head">
+    <h1>TPS Mycelium</h1>
+    <p>Collaborators connected by stories, not just services.</p>
+  </header>
+
+  <main class="layout">
+    <section class="map-wrap">
+      <!-- starry glow layer -->
+      <canvas id="aura" aria-hidden="true"></canvas>
+
+      <!-- network -->
+      <svg id="map" viewBox="0 0 1200 700" role="img" aria-label="TPS network map">
+        <g id="links"></g>
+        <g id="nodes"></g>
+      </svg>
+
+      <!-- hover card -->
+      <div id="hoverCard" class="hover-card" role="dialog" aria-hidden="true"></div>
+
+      <small class="note">Temporary only — no login, no backend.</small>
+      <button id="joinBtn" class="pill">Join the network</button>
+    </section>
+  </main>
+
+  <script src="js/mynetwork.js"></script>
+</body>
+</html>
