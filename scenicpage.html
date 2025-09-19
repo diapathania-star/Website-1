@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scenic Route — TPS</title>
+
+  <!-- Fonts (Cormorant + Source Sans 3) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- cache-buster so changes apply -->
+  <link rel="stylesheet" href="css/scenicpage.css" />
+</head>
+<body>
+  <!-- Background image + overlay -->
+  <div class="bg" role="img" aria-label="Scenic forest backdrop"></div>
+  <div class="overlay"></div>
+
+  <!-- Floating particles -->
+  <div id="fireflies" aria-hidden="true"></div>
+
+  <main class="container">
+    <header class="hero">
+      <h1>Welcome</h1>
+      <p class="sub">Build with us <br> Keep exploring, More to Come.</p>
+    </header>
+
+    <section class="choices" aria-label="Scenic options">
+      <!-- Mycelium Network -->
+      <article class="card">
+        <div class="icon mycelium" aria-hidden="true">
+          <svg viewBox="0 0 120 120" class="svg">
+            <circle cx="60" cy="60" r="7" class="node" />
+            <circle cx="25" cy="40" r="6" class="node" />
+            <circle cx="95" cy="45" r="6" class="node" />
+            <circle cx="35" cy="85" r="6" class="node" />
+            <circle cx="85" cy="85" r="6" class="node" />
+            <line x1="60" y1="60" x2="25" y2="40" class="edge"/>
+            <line x1="60" y1="60" x2="95" y2="45" class="edge"/>
+            <line x1="60" y1="60" x2="35" y2="85" class="edge"/>
+            <line x1="60" y1="60" x2="85" y2="85" class="edge"/>
+          </svg>
+        </div>
+        <h2>Mycelium Network</h2>
+        <p>See how TPS connects ideas and people.</p>
+        <a class="btn" href="mynetwork.html">Enter the network</a>
+      </article>
+
+      <!-- Breaking the Norms -->
+      <article class="card">
+        <div class="icon cracked" aria-hidden="true">
+          <svg viewBox="0 0 120 120" class="svg">
+            <circle cx="60" cy="60" r="36" class="moon"/>
+            <path d="M60 25 L57 55 L68 70 L62 95" class="crack"/>
+            <path d="M48 40 L60 60 L45 78" class="crack"/>
+          </svg>
+        </div>
+        <h2>Breaking the Norms</h2>
+        <p>Step into our rule-breaking experiments.</p>
+        <a class="btn" href="/breaking-the-norms">Break the norms →</a>
+      </article>
+    </section>
+
+    <footer class="footnote">You can always come back</footer>
+  </main>
+
+  <script src="js/scenicpage.js"></script>
+</body>
+</html>
