@@ -5,45 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Perception Studio — Gateway</title>
   <meta name="description" content="Choose how you experience TPS." />
-
-<link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/gateway1.css">
 </head>
 <body>
-  <main id="gateway" class="container">
-    <h1>Most people don't know when they've already begun.</h1>
+  <main id="gateway" class="gateway-container">
+    <!-- Left Column -->
+    <section class="gateway-left">
+      <h1>Most people don't know when they've already begun.</h1>
 
-    <figure>
-      <img
-        src="assets/hero.jpeg"
-        width="400"
-        height="200"
-        loading="eager"
-      />
-      <figcaption>Beginnings rarely look like beginnings.</figcaption>
-    </figure>
+      <!-- Timed line (space is reserved so layout doesn't jump) -->
+      <p class="extra-line" aria-live="polite">You’ve already begun just by being here.</p>
 
-    <h2>Which way do you want to know TPS?</h2>
+      <h2>Pick how you want to meet TPS…</h2>
 
-    <nav aria-label="Choose your route">
-      <a id="route-scenic" href="playful.html">Scenic</a>
-      <a id="route-normal" href="normal.html">Normal</a>
-    </nav>
+      <!-- Glow applies only to button row -->
+      <div class="choice-halo">
+        <nav class="portal-choices" aria-label="Choose your route">
+          <a id="route-scenic" class="btn btn-scenic" href="scenicpage.html">
+            <span class="icon" aria-hidden="true">🌿</span>
+            <span class="label">Scenic</span>
+          </a>
 
-    <!-- 5) Whisper line -->
-    <p class="whisper">Our choice matters the most</p>
+          <a id="route-normal" class="btn btn-normal" href="normalpage.html">
+            <span class="label">Normal</span>
+            <span class="icon" aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Whisper now outside glow -->
+      <p class="whisper">— our choice matters the most</p>
+    </section>
+
+    <!-- Right Column -->
+    <section class="gateway-right">
+      <figure>
+        <img
+          src="assets/hero.jpeg"
+          alt="Caterpillar sees a butterfly in a vintage mirror"
+          loading="eager"
+        />
+        <figcaption>Beginnings rarely look like beginnings.</figcaption>
+      </figure>
+    </section>
   </main>
 
+  <!-- JS: fade in the extra line after 10s -->
   <script>
-    const track = (name, data={}) => {
-      // replace this with Plausible/GA later
-      console.log("Track:", name, data);
-    };
-    document.getElementById('route-scenic')?.addEventListener('click', () => track('Route Chosen', { route: 'scenic' }));
-    document.getElementById('route-normal')?.addEventListener('click', () => track('Route Chosen', { route: 'normal' }));
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelector('.extra-line')?.classList.add('show');
+      }, 1000);
+    });
   </script>
 
-  <!-- cute cloud that only shows at night -->
-<script src="normalJS.js" defer></script>
+
+<!-- cute cloud that only shows at night -->
+<script src="js/normalJS.js" defer></script>
 
 <!-- Cute inline SVG cloud (shows only at night) -->
 <svg class="nighty-cloud-svg" aria-hidden="true" width="160" height="110" viewBox="0 0 160 110" xmlns="http://www.w3.org/2000/svg">
@@ -77,6 +95,7 @@
   <text class="zzz z2" x="135" y="12">Z</text>
   <text class="zzz z3" x="145" y="0">Z</text>
 </svg>
+
 
 </body>
 </html>
