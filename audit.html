@@ -14,15 +14,21 @@
 </head>
 <body>
   <!-- Header (simple) -->
-  <header class="site-header container" role="banner">
-    <a class="logo" href="normalpage.html" aria-label="Back to gateway">TPS</a>
-    <nav class="primary-nav" aria-label="Primary">
-      <a href="aboutpage.html">About us</a>
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#connect">Contact</a>
+  <header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">TPS</a>
+
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+
+    <nav class="nav" data-nav>
+      <a href="normalpage.html">Home</a>
+      <a href="aboutpage.html">About</a>
+      <a href="normalpage.html#services">Services</a>
+      <a href="audit.html">Perception Audit</a>
+      <a href="normalpage.html#contact">Contact</a>
     </nav>
-  </header>
+  </div>
+</header>
 
   <main>
     <!-- HERO -->
@@ -142,5 +148,6 @@
   <script src="js/audit.js" defer></script>
 </body>
 </html>
+
 
 
