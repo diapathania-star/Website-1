@@ -7,48 +7,61 @@
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text)}
-body{font-family:"Source Sans 3",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+body{
+  font-family:"Source Sans 3",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.6;
+}
 
+/* Links & headings */
 h1,h2{font-family:"Cormorant",serif;margin:0 0 .5rem}
 a{color:var(--muted);text-decoration:none}
 a:hover{color:var(--text)}
 
+/* Header */
 .site-header{border-bottom:1px solid #eee;background:#fff}
 .nav{max-width:1040px;margin:0 auto;padding:14px 16px;display:flex;gap:16px;align-items:center}
-.brand{font-family:"Cormorant",serif;font-weight:700;text-decoration:none;color:var(--text);font-size:1.4rem}
+.brand{font-family:"Cormorant",serif;font-weight:700;color:var(--text);font-size:1.4rem}
 .nav-link{color:var(--muted);font-weight:600}
 .nav-link:hover{color:var(--text)}
 .spacer{flex:1}
 
-.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 40px}
+/* Main wrapper */
+.wrap{max-width:1040px;margin:0 auto;padding:16px 16px 40px}
 
-.intro{max-width:760px;margin:18px auto 8px;text-align:center}
-.intro h1{font-size:2.6rem;line-height:1.1}
-.sub{color:#555;font-size:1.05rem;margin:6px auto;max-width:720px}
-.note{color:#666;font-size:.95rem;margin-top:4px}
+/* Intro block (tight spacing) */
+.intro{max-width:760px;margin:12px auto 0;text-align:center}
+.intro h1{font-size:2.4rem;line-height:1.12}
+.sub{color:#555;font-size:1.05rem;margin:6px auto 4px;max-width:720px}
+.note{color:#666;font-size:.95rem;margin:0 auto}
+.intro-divider{
+  margin:10px auto 6px;
+  width:92%;
+  border:0;
+  border-top:1px solid #e6e6e6;
+}
 
-/* ——— Tally embed (clean + auto-resize) ——— */
-.form-embed{margin:12px auto 0}
-.tps-tally{max-width:900px;margin:12px auto 0}
+/* Form section (no box) */
+.form-embed{margin:8px auto 0}
+.tps-tally{max-width:900px;margin:8px auto 0}
 .tps-tally iframe{
   display:block;
   width:100%;
-  height:1px;           /* starter height; Tally script resizes */
-  min-height:700px;     /* safety so you don’t see a tiny box on load */
+  height:1px;          /* required for Tally auto-resize */
+  min-height:700px;    /* fallback so you don't see a tiny box on first paint */
   border:0;
   background:transparent;
 }
 
-/* If you kept an old .iframe-wrap, neutralize its “box” styling */
+/* If an old .iframe-wrap exists anywhere, neutralize it */
 .iframe-wrap{padding:0;border:0;background:transparent;border-radius:0;box-shadow:none}
 
 /* Footnote + footer */
-.footnote{text-align:center;color:#666;font-size:.95rem;margin-top:10px}
+.footnote{text-align:center;color:#666;font-size:.95rem;margin-top:12px}
 .site-footer{border-top:1px solid #eee;background:#fff}
 .site-footer p{max-width:1040px;margin:0 auto;padding:18px 16px;color:#666}
 
 /* Mobile tweaks */
 @media (max-width:860px){
-  .intro h1{font-size:2.1rem}
+  .intro h1{font-size:2.05rem}
   .tps-tally iframe{min-height:900px} /* forms are taller on mobile */
 }
