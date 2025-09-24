@@ -5,59 +5,143 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perception Audit — Intake | The Perception Studio</title>
 
-  <!-- Fonts (Cormorant + Source Sans 3) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/audit-intake.css" />
+  <style>
+    :root{
+      --bg:#ffffff; --text:#111; --muted:#666; --line:#e8e8e8; --accent:#111;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);
+         font-family:"Source Sans 3",system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
+    h1{font-family:"Cormorant",serif;font-weight:700;margin:0 0 8px}
+    p.help{color:var(--muted);margin:0 0 16px}
+    .section-title{margin:22px 0 8px;font-weight:600}
+    form{border-top:1px solid var(--line);padding-top:16px}
+    label{display:block;font-weight:600;margin:16px 0 6px}
+    input[type="text"], input[type="url"], input[type="email"], textarea{
+      width:100%;padding:12px 14px;border:1px solid #dcdcdc;border-radius:10px;
+      font:inherit;background:#fff;outline:none
+    }
+    textarea{min-height:110px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr;gap:16px}
+    @media (min-width:720px){.row.two{grid-template-columns:1fr 1fr}}
+    .submit-wrap{margin:22px 0 8px}
+    .submit-btn{
+      width:100%;padding:14px 18px;border:0;border-radius:10px;
+      font-weight:700;background:var(--accent);color:#fff;cursor:pointer
+    }
+    .submit-btn:disabled{opacity:.6;cursor:not-allowed}
+    footer{margin:28px 0;color:var(--muted);font-size:14px}
+    .fine{font-size:13px;color:var(--muted);text-align:center;margin-top:8px}
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a class="brand" href="index.html">TPS</a>
-      <div class="spacer"></div>
-      <a class="nav-link" href="audit.html">Perception Audit</a>
-      <a class="nav-link" href="index.html#services">Services</a>
-      <a class="nav-link" href="index.html#about">About</a>
-      <a class="nav-link" href="index.html#contact">Contact</a>
-    </nav>
-  </header>
+  <div class="wrap">
+    <h1>Perception Audit — Intake</h1>
+    <p class="help">Fill this once. On submit you’ll be taken to the payment page.</p>
 
-  <main class="wrap">
-    <section class="intro">
-      <h1>Start Your Perception Audit</h1>
-      <p class="sub">
-        Share a few details so we can generate your audit automatically.
-        This takes ~2 minutes. After you submit, you’ll be redirected to the
-        payment page to lock your slot.
-      </p>
-      <hr class="intro-divider" />
-    </section>
+    <!-- ✅ UPDATE YOUR FORMSPREE ID BELOW -->
+    <form id="auditForm" action="https://formspree.io/f/xwprkoob" method="POST" novalidate>
 
-    <!-- Seamless Tally embed (no box, single scroll) -->
-    <section class="form-embed tps-tally" id="form">
-      <iframe
-        data-tally-src="https://tally.so/r/w45LZo?alignLeft=1&hideTitle=1&transparentBackground=1"
-        width="100%"
-        height="1"
-        loading="lazy"
-        frameborder="0"
-        title="Perception Audit – Intake">
-      </iframe>
-      <script async src="https://tally.so/widgets/embed.js"></script>
-
-      <div class="footnote">
-        By continuing you agree to our <a href="privacy.html">Privacy</a> &amp; <a href="terms.html">Terms</a>.
+      <div class="row two">
+        <div>
+          <label for="name">Full Name</label>
+          <input id="name" name="name" type="text" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+        </div>
       </div>
-    </section>
-  </main>
 
-  <footer class="site-footer">
-    <p>© The Perception Studio • Private & Confidential</p>
-  </footer>
+      <div class="row two">
+        <div>
+          <label for="role">Role / Job Title</label>
+          <input id="role" name="role" type="text" />
+        </div>
+        <div>
+          <label for="industry">Industry</label>
+          <input id="industry" name="industry" type="text" />
+        </div>
+      </div>
 
-  <script src="js/audit-intake.js" defer></script>
+      <div class="row two">
+        <div>
+          <label for="experience">Years of Experience</label>
+          <input id="experience" name="experience" type="text" />
+        </div>
+        <div>
+          <label for="location">Location</label>
+          <input id="location" name="location" type="text" />
+        </div>
+      </div>
+
+      <label for="linkedin">LinkedIn URL</label>
+      <input id="linkedin" name="linkedin" type="url" placeholder="https://www.linkedin.com/in/..." />
+
+      <label for="resume">Resume Highlights (paste or brief)</label>
+      <textarea id="resume" name="resume"></textarea>
+
+      <label for="site">Personal Website / Portfolio</label>
+      <input id="site" name="site" type="url" placeholder="https://..." />
+
+      <label for="social">Other Social Links</label>
+      <input id="social" name="social" type="text" placeholder="Instagram, X, YouTube, etc." />
+
+      <label for="goals">Goals for Audit</label>
+      <textarea id="goals" name="goals"></textarea>
+
+      <label for="vision">Future Vision (2–3 years)</label>
+      <textarea id="vision" name="vision"></textarea>
+
+      <label for="wins">Top Wins / Achievements</label>
+      <textarea id="wins" name="wins"></textarea>
+
+      <label for="inspo">Inspiration / Competitors</label>
+      <textarea id="inspo" name="inspiration_competitors"></textarea>
+
+      <!-- Optional hidden field for subject/tagging in Formspree -->
+      <input type="hidden" name="_subject" value="Perception Audit Intake" />
+
+      <div class="submit-wrap">
+        <button id="submitBtn" type="submit" class="submit-btn">Submit & Continue to Payment</button>
+        <div class="fine">By continuing you agree to our Privacy & Terms.</div>
+      </div>
+    </form>
+
+    <footer>© The Perception Studio • Private & Confidential</footer>
+  </div>
+
+  <script>
+    // Submit to Formspree, then redirect to payment page in same folder.
+    (function(){
+      const form = document.getElementById('auditForm');
+      const btn  = document.getElementById('submitBtn');
+
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        btn.disabled = true; btn.textContent = 'Submitting...';
+
+        try{
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if(!res.ok) throw new Error('Submit failed');
+          // ✅ payment.html must be in the same folder
+          window.location.href = './payment.html';
+        }catch(err){
+          alert('Could not submit form. Please check your internet and try again.');
+          btn.disabled = false; btn.textContent = 'Submit & Continue to Payment';
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
-
