@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment Failed | The Perception Studio</title>
+  <meta name="description" content="Your payment has failed. You can try again or contact us for support.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; }
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background:#f9f9f9;
+      min-height:100dvh;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .container {
+      max-width: 640px;
+      width: 92%;
+      background:#fff;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+      position: relative; /* ensures z-index works */
+      z-index: 1;
+    }
+    h1 {
+      font-family: 'Cormorant', serif;
+      font-size: 2rem; margin: 0 0 12px; color:#b33a3a;
+    }
+    p { margin: 8px 0; color:#333; }
+    .actions { margin-top: 18px; display:flex; flex-wrap:wrap; gap:10px; }
+    a.btn, button.btn, a.btn-secondary {
+      display:inline-block;
+      padding:12px 20px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      position:relative; z-index:2; /* above any accidental overlays */
+    }
+    a.btn, button.btn { background:#3E3E3E; color:#fff; border:none; }
+    a.btn-secondary {
+      background:#ECE6DA; color:#3E3E3E; border:1px solid #3E3E3E;
+    }
+    /* Defensive: ensure links receive clicks */
+    a, button { pointer-events:auto !important; }
+    /* If you had a full-page overlay somewhere, this defeats it for demo:
+       .overlay { pointer-events:none; }  (Don’t add unless needed) */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>❌ Payment Cancelled</h1>
+    <p>Your payment was not completed.</p>
+    <p>If this was a mistake, you can try again or contact us for help.</p>
+
+    <div class="actions">
+      <a href="audit-intake.html" class="btn">Try Again</a>
+
+      <!-- 2) GMAIL FALLBACK (forces Gmail compose in new tab) -->
+      <button
+        class="btn"
+        type="button"
+        id="gmailBtn"
+        aria-label="Contact Support via Gmail"
+      >
+        Email via Gmail
+      </button>
+    </div>
+
+  <script>
+    // If some global JS was preventing all <a> clicks, we override here:
+    // (Not usually necessary, but helps if a previous script did e.preventDefault() globally.)
+    document.addEventListener('click', function(e) {
+      // no-op; this listener exists to demonstrate that clicks are being received
+    }, true);
+
+    // Gmail compose fallback
+    document.getElementById('gmailBtn')?.addEventListener('click', function () {
+      const to = 'theperception.studio1@gmail.com';
+      const subject = encodeURIComponent('Payment Support');
+      const body = encodeURIComponent(
+        'Hi TPS Team,\n\nI need help with my payment.\n\nThank you.'
+      );
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
+      window.open(gmailUrl, '_blank', 'noopener'); // opens new tab
+    });
+  </script>
+</body>
+</html>
