@@ -11,7 +11,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- Styles -->
   <link rel="stylesheet" href="css/successpage.css" />
+  <style>
+    /* Extra fixes for the support buttons */
+    .actions a.link,
+    .actions .btn,
+    .actions .btn-secondary,
+    .actions button {
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+    }
+    .btn-secondary {
+      display: inline-block;
+      padding: 10px 18px;
+      margin-left: 10px;
+      border-radius: 6px;
+      border: 1px solid #3E3E3E;
+      background: #ECE6DA;
+      color: #3E3E3E;
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
   <main class="wrap">
@@ -44,9 +68,9 @@
 
       <div class="actions">
         <a class="btn" href="/">Back to Home</a>
-        <a class="link" href="mailto:theperception.studio1@gmail.com" target="_blank" rel="noopener noreferrer">
-  Need help?
-</a>
+
+        <!-- Gmail fallback -->
+        <button id="needHelpGmail" class="btn-secondary" type="button">Email via Gmail</button>
       </div>
 
       <!-- Optional: show Razorpay IDs if appended as query params -->
@@ -55,7 +79,7 @@
   </main>
 
   <script>
-    // If Razorpay redirects with ?razorpay_payment_id=...&razorpay_order_id=...
+    // Show Razorpay IDs if returned in redirect URL
     const params = new URLSearchParams(window.location.search);
     const pid = params.get('razorpay_payment_id');
     const oid = params.get('razorpay_order_id');
@@ -66,6 +90,20 @@
         <div class="meta-row"><span>Payment ID</span><code>${pid || '—'}</code></div>
         <div class="meta-row"><span>Order ID</span><code>${oid || '—'}</code></div>
       `;
+    }
+
+    // Gmail compose fallback
+    const gmailBtn = document.getElementById('needHelpGmail');
+    if (gmailBtn) {
+      gmailBtn.addEventListener('click', function () {
+        const to = 'theperception.studio1@gmail.com';
+        const su = encodeURIComponent('Payment Support');
+        const body = encodeURIComponent(
+          'Hi TPS Team,\n\nMy payment succeeded but I need help.\n\nThanks.'
+        );
+        const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${body}`;
+        window.open(url, '_blank', 'noopener');
+      });
     }
   </script>
 </body>
