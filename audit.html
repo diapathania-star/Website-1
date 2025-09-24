@@ -5,126 +5,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Perception Audit | The Perception Studio</title>
 
-  <!-- Fonts (Cormorant + Source Sans 3) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/audit.css" />
+  <link rel="stylesheet" href="css/auditlanding.css" />
 </head>
 <body>
-  <!-- Header (simple) -->
-  <header class="site-header">
-  <div class="container">
-    <a class="brand" href="index.html">TPS</a>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a class="brand" href="index.html">TPS</a>
 
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
 
-    <nav class="nav" data-nav>
-      <a href="normalpage.html">Home</a>
-      <a href="aboutpage.html">About</a>
-      <a href="normalpage.html#services">Services</a>
-      <a href="audit.html">Perception Audit</a>
-      <a href="normalpage.html#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+      <nav class="nav" data-nav role="navigation" aria-label="Primary">
+        <a href="normalpage.html">Home</a>
+        <a href="aboutpage.html">About</a>
+        <a href="normalpage.html#services">Services</a>
+        <a href="audit.html" class="active" aria-current="page">Perception Audit</a>
+        <a href="normalpage.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-  <main>
+  <main id="main">
     <!-- HERO -->
     <section class="hero">
       <h1 class="hero-title">Perception Audit</h1>
       <p class="hero-sub">
-        In the first 8 seconds online, people decide to click or move on. This audit shows what they see—<em>and how to fix it</em>.
+        How do people really see you online?<br>
+        Uncover blind spots, build trust, and get a clear plan to boost credibility.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="audit-intake.html">Start your audit →</a>
-        <span class="price-tag">Intro price: <strong>₹499</strong></span>
+        <a class="btn btn-primary" href="audit-intake.html">Start Audit for ₹499</a>
       </div>
-      <p class="trust-line">Private & confidential • Delivered to your inbox</p>
     </section>
 
-    <!-- BRIEF OF SERVICE -->
+    <!-- WHAT THIS IS -->
     <section class="section service-brief" id="overview">
       <h2 class="section-title">What this is</h2>
       <p class="lead">
-        A compact, score-driven diagnostic of your digital presence. We measure the moments that shape memory—your first-glance identity, story coherence, activity, expert signals, community proof, trust markers, cultural fit, and Google presence—and return a clear plan to turn attention into opportunities.
+        A compact, score-based diagnostic of your digital presence. We check 8 key signals
+        (first-glance identity, story fit, activity, expertise, community proof, trust markers,
+        cultural fit, Google presence) and return a simple plan to turn attention into opportunities.
       </p>
+
       <ul class="grid-3 bullets">
-        <li><h3>Fast signal check</h3><p>A crisp snapshot of how you show up in search and on LinkedIn.</p></li>
-        <li><h3>Gaps → moves</h3><p>We translate gaps into specific actions, not vague advice.</p></li>
-        <li><h3>Designed to ship</h3><p>Get a PDF you can start using today—no calls, no wait.</p></li>
+        <li>
+          <h3>Fast check</h3>
+          <p>How you show up on search and LinkedIn — at a glance.</p>
+        </li>
+        <li>
+          <h3>Gaps → moves</h3>
+          <p>Clear next steps instead of vague advice.</p>
+        </li>
+        <li>
+          <h3>Ready to ship</h3>
+          <p>A PDF you can act on today — no calls needed.</p>
+        </li>
       </ul>
-      <div class="cta-center">
-        <a class="btn btn-primary" href="audit-intake.html">Begin in 2 minutes</a>
-      </div>
     </section>
 
     <!-- WHAT YOU GET -->
     <section class="section what-you-get" id="what-you-get">
       <h2 class="section-title">What you get</h2>
       <ul class="grid-2 checklist">
-        <li><span class="tick" aria-hidden="true">✓</span> Overall Presence Score (0–100) + 8-signal scorecard</li>
-        <li><span class="tick" aria-hidden="true">✓</span> Gap analysis: what people see vs what’s missing</li>
-        <li><span class="tick" aria-hidden="true">✓</span> Opportunity map (3–5 positioning plays)</li>
-        <li><span class="tick" aria-hidden="true">✓</span> 90-day action plan (2, 6, 12 weeks)</li>
-        <li><span class="tick" aria-hidden="true">✓</span> Long-term vision snapshot</li>
+        <li><span class="tick" aria-hidden="true">✓</span> Presence Score (0–100) + breakdown across 8 signals</li>
+        <li><span class="tick" aria-hidden="true">✓</span> Gap vs. reality summary (what people see vs. what’s missing)</li>
+        <li><span class="tick" aria-hidden="true">✓</span> 3–5 positioning opportunities</li>
+        <li><span class="tick" aria-hidden="true">✓</span> 90-day action plan (weeks 2, 6, 12)</li>
+        <li><span class="tick" aria-hidden="true">✓</span> Long-term direction snapshot</li>
         <li><span class="tick" aria-hidden="true">✓</span> Private PDF delivered to your email</li>
       </ul>
+
       <div class="cta-center">
-        <a class="btn btn-outline" href="audit-intake.html">Get my audit →</a>
+        <a class="btn btn-outline" href="audit-intake.html">Ready to uncover</a>
       </div>
     </section>
 
-    <!-- HOW IT WORKS -->
+    <!-- HOW IT WORKS (now side-by-side cards on desktop) -->
     <section class="section how-it-works" id="how">
       <h2 class="section-title">How it works</h2>
-      <ol class="steps">
-        <li><strong>Tell us the basics.</strong> Share your links, goals, and a quick career summary.</li>
-        <li><strong>Secure payment.</strong> Checkout to lock your slot at <b>₹499</b>.</li>
-        <li><strong>Receive your audit.</strong> A polished PDF lands in your inbox—ready to act on.</li>
+
+      <ol class="steps steps-grid" role="list">
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">1</div>
+          <h3>Tell us the basics.</h3>
+          <p>Share your links, goals, and a quick summary.</p>
+        </li>
+
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">2</div>
+          <h3>Secure payment.</h3>
+          <p>Checkout to lock your slot at <b>₹499</b>.</p>
+        </li>
+
+        <li class="step-card">
+          <div class="step-num" aria-hidden="true">3</div>
+          <h3>Get your PDF.</h3>
+          <p>A polished report lands in your inbox — ready to use.</p>
+        </li>
       </ol>
     </section>
 
     <!-- FAQ -->
     <section class="section faq" id="faq">
       <h2 class="section-title">FAQs</h2>
+
       <div class="faq-list" data-accordion>
         <article class="faq-item">
           <button class="faq-q" aria-expanded="false">How fast do I get the audit?</button>
-          <div class="faq-a">
-            <p>Typically within minutes of successful payment and form submission. If there’s a rare delay, you’ll still receive a confirmation email and we’ll resolve it quickly.</p>
-          </div>
+          <div class="faq-a"><p>Usually within minutes after payment + form. If there’s a delay, you’ll get a confirmation and we’ll sort it.</p></div>
         </article>
+
         <article class="faq-item">
           <button class="faq-q" aria-expanded="false">Do I need a call to start?</button>
-          <div class="faq-a">
-            <p>No calls required. The audit is designed to be self-serve—share details, checkout, receive your PDF.</p>
-          </div>
+          <div class="faq-a"><p>No. It’s fully self-serve: share details → pay → receive your PDF.</p></div>
         </article>
+
         <article class="faq-item">
           <button class="faq-q" aria-expanded="false">What inputs do you need?</button>
-          <div class="faq-a">
-            <p>Your LinkedIn link, basic background, goals, and optional highlights (wins, portfolio, socials). The intake form guides you step-by-step.</p>
-          </div>
+          <div class="faq-a"><p>LinkedIn link, basics about you, goals, and optional highlights. The form guides you.</p></div>
         </article>
+
         <article class="faq-item">
           <button class="faq-q" aria-expanded="false">Is my information private?</button>
-          <div class="faq-a">
-            <p>Yes. Your details are used solely to generate your audit and are not shared or sold. You’ll receive a private PDF for your records.</p>
-          </div>
+          <div class="faq-a"><p>Yes. We use your data only to generate the audit and send a private PDF.</p></div>
         </article>
+
         <article class="faq-item">
-          <button class="faq-q" aria-expanded="false">What exactly is in the PDF?</button>
-          <div class="faq-a">
-            <p>An overall score, 8-signal scorecard, gap analysis, opportunity map, a 90-day plan, and a long-term vision summary—formatted in TPS style.</p>
-          </div>
+          <button class="faq-q" aria-expanded="false">What’s inside the PDF?</button>
+          <div class="faq-a"><p>Score (0–100), 8-signal breakdown, gaps, 3–5 opportunities, 90-day plan, long-term view — in TPS format.</p></div>
         </article>
+
         <article class="faq-item">
-          <button class="faq-q" aria-expanded="false">What if I want help implementing the plan?</button>
-          <div class="faq-a">
-            <p>You’ll get an option to upgrade to Narrative Design or Visibility Engine. Start with the audit; if it resonates, we’ll take it deeper.</p>
-          </div>
+          <button class="faq-q" aria-expanded="false">Can you help me implement?</button>
+          <div class="faq-a"><p>Yes — you can upgrade to Narrative Design or Visibility later.</p></div>
         </article>
       </div>
     </section>
@@ -135,19 +153,16 @@
         <h2 class="section-title">Ready to see what people see?</h2>
         <p>Lock your audit at the intro price and get a clear, doable plan today.</p>
         <div class="cta-center">
-          <a class="btn btn-primary" href="audit-intake.html">Start your audit for ₹499</a>
+          <a class="btn btn-primary" href="audit-intake.html">Start Audit for ₹499</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <p>© The Perception Studio • Private & Confidential • <a href="privacy.html">Privacy</a> • <a href="terms.html">Terms</a></p>
   </footer>
 
-  <script src="js/audit.js" defer></script>
+  <script src="js/auditlanding.js" defer></script>
 </body>
 </html>
-
-
-
