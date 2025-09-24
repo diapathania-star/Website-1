@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment Successful — Perception Audit | The Perception Studio</title>
+  <meta name="description" content="Payment successful. Your Perception Audit is confirmed. Next steps and timelines inside." />
+
+  <!-- Fonts (Cormorant + Source Sans 3) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/successpage.css" />
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="icon-tick" aria-hidden="true">✓</div>
+
+      <h1>Payment Successful</h1>
+      <p class="lead">You’ve booked your <strong>Perception Audit (₹499)</strong>.</p>
+
+      <div class="steps">
+        <h2>What happens next</h2>
+        <ol>
+          <li><span>1</span><div><strong>We review your info</strong> — within <b>24 hours</b>, your details are in our system.</div></li>
+          <li><span>2</span><div><strong>Audit in progress</strong> — we break down your perception map and narrative.</div></li>
+          <li><span>3</span><div><strong>Report arrives</strong> — your audit hits your inbox in <b>48 hours</b>.</div></li>
+        </ol>
+      </div>
+
+      <div class="surprise">
+        <p><strong>You just unlocked the first step to building gravity around your profile.</strong><br/>From here, everything compounds.</p>
+      </div>
+
+      <div class="meantime">
+        <h3>In the meantime</h3>
+        <ul>
+          <li>Keep LinkedIn & CV updated — we’ll cross-check them.</li>
+          <li>That’s it. We’ll take it from here.</li>
+        </ul>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="/">Back to Home</a>
+        <a class="link" href="mailto:theperception.studio1@gmail.com" target="_blank" rel="noopener noreferrer">
+  Need help?
+</a>
+      </div>
+
+      <!-- Optional: show Razorpay IDs if appended as query params -->
+      <div id="payment-meta" class="meta" hidden></div>
+    </section>
+  </main>
+
+  <script>
+    // If Razorpay redirects with ?razorpay_payment_id=...&razorpay_order_id=...
+    const params = new URLSearchParams(window.location.search);
+    const pid = params.get('razorpay_payment_id');
+    const oid = params.get('razorpay_order_id');
+    if (pid || oid) {
+      const meta = document.getElementById('payment-meta');
+      meta.hidden = false;
+      meta.innerHTML = `
+        <div class="meta-row"><span>Payment ID</span><code>${pid || '—'}</code></div>
+        <div class="meta-row"><span>Order ID</span><code>${oid || '—'}</code></div>
+      `;
+    }
+  </script>
+</body>
+</html>
