@@ -56,14 +56,24 @@
             <div class="error" data-error-for="email" aria-live="polite">Please enter a valid email.</div>
           </div>
           <div>
-            <label for="role">Role / Title</label>
-            <input id="role" name="role" type="text" placeholder="e.g., Product Manager, Founder" autocomplete="organization-title" />
-            <div class="help">Gives context to how your profile should signal credibility.</div>
+            <label for="role">Role / Title <span class="req">*</span></label>
+            <input id="role" name="role" type="text" required placeholder="e.g., Product Manager, Founder" autocomplete="organization-title" />
+            <div class="error" data-error-for="role" aria-live="polite">Please enter your role/title.</div>
           </div>
           <div>
-            <label for="location">Location</label>
-            <input id="location" name="location" type="text" placeholder="City, Country" autocomplete="address-level2" />
-            <div class="help">Useful for region-specific opportunities and media.</div>
+            <label for="location">Location <span class="req">*</span></label>
+            <input id="location" name="location" type="text" required placeholder="City, Country" autocomplete="address-level2" />
+            <div class="error" data-error-for="location" aria-live="polite">Please enter your location.</div>
+          </div>
+          <div>
+            <label for="yearsExp">Years of experience <span class="req">*</span></label>
+            <input id="yearsExp" name="yearsExp" type="number" min="0" max="60" required />
+            <div class="error" data-error-for="yearsExp" aria-live="polite">Please enter your years of experience.</div>
+          </div>
+          <div>
+            <label for="industry">Industry / Domain <span class="req">*</span></label>
+            <input id="industry" name="industry" type="text" required placeholder="e.g., Supply Chain, VFX, SaaS" />
+            <div class="error" data-error-for="industry" aria-live="polite">Please enter your industry/domain.</div>
           </div>
         </div>
       </section>
@@ -81,20 +91,15 @@
           </div>
           <div class="grid two">
             <div>
+              <label for="resume">Resume / CV (PDF/DOC)</label>
+              <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" />
+              <div class="help">Attach your latest resume (optional).</div>
+            </div>
+            <div>
               <label for="website">Website / Portfolio</label>
               <input id="website" name="website" type="url" placeholder="https://…" />
               <div class="help">Optional, but great if you have case studies or a portfolio.</div>
             </div>
-            <div>
-              <label for="otherLinks">Other links (comma-separated)</label>
-              <input id="otherLinks" name="otherLinks" type="text" placeholder="Twitter, Medium, GitHub, press, etc." />
-              <div class="help">Anything else that represents you publicly.</div>
-            </div>
-          </div>
-          <div>
-            <label for="presenceNotes">Anything we should know about your online presence?</label>
-            <textarea id="presenceNotes" name="presenceNotes" maxlength="500" placeholder="e.g., old blogs, a name change, duplicate profiles, previous PR, etc."></textarea>
-            <div class="char-count" data-count-for="presenceNotes">0 / 500</div>
           </div>
         </div>
       </section>
@@ -105,27 +110,25 @@
         <p class="step-info">Your goals shape the audit score, recommendations, and quick wins.</p>
         <div class="grid">
           <div>
-            <label for="primaryGoal">Primary goal for this audit <span class="req">*</span></label>
-            <select id="primaryGoal" name="primaryGoal" required>
-              <option value="">Select one…</option>
-              <option>Credibility for recruiters</option>
-              <option>Client trust & lead quality</option>
-              <option>Thought leadership positioning</option>
-              <option>Visa / global talent narrative</option>
-              <option>Other</option>
-            </select>
-            <div class="help">We’ll bias the recommendations toward this outcome.</div>
-            <div class="error" data-error-for="primaryGoal" aria-live="polite">Please select your primary goal.</div>
+            <label for="primaryGoalText">What do you want from this audit? <span class="req">*</span></label>
+            <textarea id="primaryGoalText" name="primaryGoal" required maxlength="200" placeholder="e.g., Credibility for recruiters / Client trust / Thought leadership / Visa narrative"></textarea>
+            <div class="char-count" data-count-for="primaryGoalText">0 / 200</div>
+            <div class="error" data-error-for="primaryGoalText" aria-live="polite">Please tell us your primary goal.</div>
           </div>
           <div>
-            <label for="successLook">In one sentence, what does success look like in 90 days?</label>
-            <textarea id="successLook" name="successLook" maxlength="200" placeholder="e.g., 3 recruiter calls/week without cold outreach"></textarea>
-            <div class="char-count" data-count-for="successLook">0 / 200</div>
+            <label for="goalWhere">Where is your goal? <span class="req">*</span></label>
+            <input id="goalWhere" name="goalWhere" type="text" required placeholder="e.g., Recruiters, Clients, Industry peers, Press, Visa, etc." />
+            <div class="error" data-error-for="goalWhere" aria-live="polite">Please specify where your goal applies.</div>
           </div>
           <div>
-            <label for="biggestBlock">What’s the biggest current blocker?</label>
-            <textarea id="biggestBlock" name="biggestBlock" maxlength="240" placeholder="e.g., unclear story; scattered online footprint"></textarea>
-            <div class="char-count" data-count-for="biggestBlock">0 / 240</div>
+            <label for="topWins">Any wins / achievements (2–3 bullets)</label>
+            <textarea id="topWins" name="topWins" maxlength="600" placeholder="• TOI feature on X&#10;• Shipped Y impacting 500k users&#10;• Led Z initiative with measurable results"></textarea>
+            <div class="char-count" data-count-for="topWins">0 / 600</div>
+          </div>
+          <div>
+            <label for="goalExtra">Extra info</label>
+            <textarea id="goalExtra" name="goalExtra" maxlength="300" placeholder="Context that helps us tailor the audit"></textarea>
+            <div class="char-count" data-count-for="goalExtra">0 / 300</div>
           </div>
         </div>
       </section>
@@ -133,23 +136,8 @@
       <!-- STEP 4: Evidence -->
       <section class="step" data-step="4" hidden aria-labelledby="s4-title">
         <h2 class="visually-hidden" id="s4-title">Evidence</h2>
-        <p class="step-info">Wins and proof links strengthen your narrative and score.</p>
+        <p class="step-info">Optional proof links strengthen your narrative and score.</p>
         <div class="grid">
-          <div class="grid two">
-            <div>
-              <label for="yearsExp">Years of experience</label>
-              <input id="yearsExp" name="yearsExp" type="number" min="0" max="60" />
-            </div>
-            <div>
-              <label for="industry">Industry / Domain</label>
-              <input id="industry" name="industry" type="text" placeholder="e.g., Supply Chain, VFX, SaaS" />
-            </div>
-          </div>
-          <div>
-            <label for="topWins">Top 3 wins / achievements (bullet list)</label>
-            <textarea id="topWins" name="topWins" maxlength="600" placeholder="• TOI feature on X&#10;• Shipped Y impacting 500k users&#10;• Led Z initiative with measurable results"></textarea>
-            <div class="char-count" data-count-for="topWins">0 / 600</div>
-          </div>
           <div>
             <label for="proofLinks">Proof links (press, talks, decks, case studies)</label>
             <textarea id="proofLinks" name="proofLinks" maxlength="600" placeholder="Paste URLs on new lines"></textarea>
@@ -195,15 +183,12 @@
             <strong>Almost there.</strong> Review your details. When you submit, you’ll be redirected to the payment page to complete your order.
           </div>
           <div class="notice">By submitting, you agree to receive your personalized audit PDF and recommendations within 5 business days. You’ll get an email confirmation immediately.</div>
-          <div class="grid two">
-            <div>
-              <label><input type="checkbox" id="consent" name="consent" required> I confirm the details are accurate. <span class="req">*</span></label>
-              <div class="error" data-error-for="consent" aria-live="polite">Please confirm before submitting.</div>
-            </div>
-            <div>
-              <label><input type="checkbox" id="privacy" name="privacy" required> I accept the privacy terms. <span class="req">*</span></label>
-              <div class="error" data-error-for="privacy" aria-live="polite">Please accept to continue.</div>
-            </div>
+          <div>
+            <label>
+              <input type="checkbox" id="processingConsent" name="processingConsent" required>
+              I agree to The Perception Studio processing my information to create a Perception Audit. <span class="req">*</span>
+            </label>
+            <div class="error" data-error-for="processingConsent" aria-live="polite">Please agree to continue.</div>
           </div>
         </div>
       </section>
@@ -359,7 +344,7 @@
           document.getElementById('submitted_at').value = new Date().toISOString();
           document.getElementById('page_url').value = location.href;
 
-          const res = await fetch(FORMSPREE_ENDPOINT, {
+          const res = await fetch('https://formspree.io/f/xwprkoob', {
             method: 'POST',
             body: fd,
             headers: { 'Accept': 'application/json' }
@@ -367,7 +352,7 @@
 
           if (!res.ok) throw new Error('Submission failed');
           localStorage.removeItem(STORAGE_KEY);
-          window.location.href = PAYMENT_URL;
+          window.location.href = 'https://rzp.io/rzp/vjYWLN7';
         } catch (e) {
           alert('Something went wrong. Please try again, or email us at hello@theperception.studio');
           nextBtn.disabled = false; prevBtn.disabled = current === 0; nextBtn.textContent = 'Submit & Continue to Payment';
