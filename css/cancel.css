@@ -1,0 +1,48 @@
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+h1 {
+  font-family: 'Cormorant', serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #b33a3a; /* red tone for cancel */
+}
+
+p {
+  margin: 10px 0;
+  color: #333;
+}
+
+.btn, .btn-secondary {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 15px 10px 0;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn {
+  background: #3E3E3E;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #ECE6DA;
+  color: #3E3E3E;
+  border: 1px solid #3E3E3E;
+}
