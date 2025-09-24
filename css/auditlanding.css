@@ -166,3 +166,19 @@ h1,h2,h3{
   .hero-title{ font-size:2.4rem; }
   .hero-sub{ font-size:1.05rem; }
 }
+
+/* Fix "What this is" row using full width */
+.service-brief .bullets{
+  padding-left: 1.2rem;   /* restore UL indentation */
+  list-style: disc;       /* show bullets */
+  margin: 16px 0 6px;
+}
+
+.service-brief .bullets li{
+  margin-bottom: 0.5rem;  /* spacing between items */
+}
+
+/* If you want the intro paragraph to use the full section width too: */
+.service-brief .lead{
+  max-width: none;           /* or set to 1040px to match .section */
+}
