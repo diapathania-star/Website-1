@@ -1,67 +1,85 @@
-:root{
-  --bg:#ffffff;
-  --text:#1a1a1a;
-  --muted:#3e3e3e;     /* Muted Charcoal */
-  --soft:#F5F2ED;      /* Paper Beige */
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #3e3e3e;
 }
 
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--text)}
-body{
-  font-family:"Source Sans 3",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  line-height:1.6;
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+body {
+  font-family: "Source Sans 3", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.6;
+  overflow-y: auto;
 }
 
 /* Links & headings */
-h1,h2{font-family:"Cormorant",serif;margin:0 0 .5rem}
-a{color:var(--muted);text-decoration:none}
-a:hover{color:var(--text)}
+h1, h2 { font-family: "Cormorant", serif; margin: 0 0 .5rem; }
+a { color: var(--muted); text-decoration: none; }
+a:hover { color: var(--text); }
 
 /* Header */
-.site-header{border-bottom:1px solid #eee;background:#fff}
-.nav{max-width:1040px;margin:0 auto;padding:14px 16px;display:flex;gap:16px;align-items:center}
-.brand{font-family:"Cormorant",serif;font-weight:700;color:var(--text);font-size:1.4rem}
-.nav-link{color:var(--muted);font-weight:600}
-.nav-link:hover{color:var(--text)}
-.spacer{flex:1}
+.site-header { border-bottom: 1px solid #eee; background: #fff; }
+.nav { max-width: 1040px; margin: 0 auto; padding: 14px 16px; display: flex; gap: 16px; align-items: center; }
+.brand { font-family: "Cormorant", serif; font-weight: 700; font-size: 1.4rem; color: var(--text); }
+.nav-link { color: var(--muted); font-weight: 600; }
+.nav-link:hover { color: var(--text); }
+.spacer { flex: 1; }
 
 /* Main wrapper */
-.wrap{max-width:1040px;margin:0 auto;padding:16px 16px 40px}
+.wrap { max-width: 1040px; margin: 0 auto; padding: 16px 16px 40px; }
 
-/* Intro block (tight spacing) */
-.intro{max-width:760px;margin:12px auto 0;text-align:center}
-.intro h1{font-size:2.4rem;line-height:1.12}
-.sub{color:#555;font-size:1.05rem;margin:6px auto 4px;max-width:720px}
-.note{color:#666;font-size:.95rem;margin:0 auto}
-.intro-divider{
-  margin:10px auto 6px;
-  width:92%;
-  border:0;
-  border-top:1px solid #e6e6e6;
+/* Intro */
+.intro { max-width: 760px; margin: 12px auto 0; text-align: center; }
+.intro h1 { font-size: 2.4rem; line-height: 1.12; }
+.sub { color: #555; font-size: 1.05rem; margin: 6px auto 4px; max-width: 720px; }
+.note { color: #666; font-size: .95rem; margin: 0 auto; }
+.intro-divider { margin: 6px auto 0; width: 92%; border: 0; border-top: 1px solid #e6e6e6; }
+
+/* Form */
+.form-embed { margin: 6px auto 0; }
+.tps-form {
+  max-width: 900px;
+  margin: 10px auto 0;
+  padding: 0 16px;
+  display: grid;
+  gap: 16px;
 }
-
-/* Form section (no box) */
-.form-embed{margin:8px auto 0}
-.tps-tally{max-width:900px;margin:8px auto 0}
-.tps-tally iframe{
-  display:block;
-  width:100%;
-  height:1px;          /* required for Tally auto-resize */
-  min-height:700px;    /* fallback so you don't see a tiny box on first paint */
-  border:0;
-  background:transparent;
+.tps-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--text);
+  font-weight: 600;
 }
+.tps-form input, .tps-form textarea {
+  font: 400 1rem/1.4 "Source Sans 3", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+}
+.tps-form input:focus, .tps-form textarea:focus { border-color: var(--text); }
 
-/* If an old .iframe-wrap exists anywhere, neutralize it */
-.iframe-wrap{padding:0;border:0;background:transparent;border-radius:0;box-shadow:none}
+/* Submit button */
+.tally-btn {
+  border: 1px solid #1a1a1a;
+  background: #1a1a1a;
+  color: #fff;
+  font: 600 1rem/1 "Source Sans 3", system-ui, sans-serif;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .06s ease, background .2s ease;
+}
+.tally-btn:hover { background:#2a2a2a; }
+.tally-btn:active { transform: translateY(1px); }
 
 /* Footnote + footer */
-.footnote{text-align:center;color:#666;font-size:.95rem;margin-top:12px}
-.site-footer{border-top:1px solid #eee;background:#fff}
-.site-footer p{max-width:1040px;margin:0 auto;padding:18px 16px;color:#666}
+.footnote { text-align: center; color: #666; font-size: .95rem; margin-top: 12px; }
+.site-footer { border-top: 1px solid #eee; background: #fff; }
+.site-footer p { max-width: 1040px; margin: 0 auto; padding: 18px 16px; color: #666; }
 
-/* Mobile tweaks */
-@media (max-width:860px){
-  .intro h1{font-size:2.05rem}
-  .tps-tally iframe{min-height:900px} /* forms are taller on mobile */
+/* Mobile */
+@media (max-width: 860px) {
+  .intro h1 { font-size: 2.05rem; }
+  .tps-form { padding: 0 14px; }
 }
