@@ -3,150 +3,402 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Perception Audit — Intake | The Perception Studio</title>
-
-  <!-- Fonts -->
+  <title>Perception Audit — Multi-Step Intake | The Perception Studio</title>
+  <meta name="description" content="Start your Perception Audit. A guided, multi-step intake form with save-as-you-go and clear progress.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg:#ffffff; --text:#111; --muted:#666; --line:#e8e8e8; --accent:#111;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);
-         font-family:"Source Sans 3",system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
-    .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
-    h1{font-family:"Cormorant",serif;font-weight:700;margin:0 0 8px}
-    p.help{color:var(--muted);margin:0 0 16px}
-    .section-title{margin:22px 0 8px;font-weight:600}
-    form{border-top:1px solid var(--line);padding-top:16px}
-    label{display:block;font-weight:600;margin:16px 0 6px}
-    input[type="text"], input[type="url"], input[type="email"], textarea{
-      width:100%;padding:12px 14px;border:1px solid #dcdcdc;border-radius:10px;
-      font:inherit;background:#fff;outline:none
-    }
-    textarea{min-height:110px;resize:vertical}
-    .row{display:grid;grid-template-columns:1fr;gap:16px}
-    @media (min-width:720px){.row.two{grid-template-columns:1fr 1fr}}
-    .submit-wrap{margin:22px 0 8px}
-    .submit-btn{
-      width:100%;padding:14px 18px;border:0;border-radius:10px;
-      font-weight:700;background:var(--accent);color:#fff;cursor:pointer
-    }
-    .submit-btn:disabled{opacity:.6;cursor:not-allowed}
-    footer{margin:28px 0;color:var(--muted);font-size:14px}
-    .fine{font-size:13px;color:var(--muted);text-align:center;margin-top:8px}
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/audit-intake.css">
 </head>
 <body>
-  <div class="wrap">
-    <h1>Perception Audit — Intake</h1>
-    <p class="help">Fill this once. On submit you’ll be taken to the payment page.</p>
+  <div class="container">
+    <!-- Hero -->
+    <header class="hero">
+      <div class="eyebrow">Perception Audit</div>
+      <h1>What’s your digital first impression worth?</h1>
+      <p class="sub">Start the audit intake. It’s a guided, multi-step form that captures the essentials we need to map how the world perceives you—and how to fix blind spots.</p>
+    </header>
 
-    <!-- ✅ UPDATE YOUR FORMSPREE ID BELOW -->
-    <form id="auditForm" action="https://formspree.io/f/xwprkoob" method="POST" novalidate>
+    <!-- Progress -->
+    <div class="progress-wrap" role="region" aria-label="Form progress">
+      <div class="progress-bar" aria-hidden="true"><div id="progressFill" class="progress-fill"></div></div>
+      <div class="step-labels" id="stepLabels" aria-hidden="true">
+        <span class="active">Profile</span>
+        <span>Presence</span>
+        <span>Goals</span>
+        <span>Evidence</span>
+        <span>Preferences</span>
+        <span>Confirm</span>
+      </div>
+    </div>
 
-      <div class="row two">
-        <div>
-          <label for="name">Full Name</label>
-          <input id="name" name="name" type="text" required />
+    <!-- Form -->
+    <form id="auditForm" class="card" novalidate>
+      <!-- Metadata (hidden) -->
+      <input type="hidden" name="submitted_at" id="submitted_at">
+      <input type="hidden" name="page_url" id="page_url">
+
+      <!-- STEP 1: Profile -->
+      <section class="step" data-step="1" aria-labelledby="s1-title">
+        <h2 class="visually-hidden" id="s1-title">Profile</h2>
+        <p class="step-info">Basic details help us address you correctly and add context to your audit.</p>
+        <div class="grid two">
+          <div>
+            <label for="fullName">Full name <span class="req">*</span></label>
+            <input id="fullName" name="fullName" type="text" required autocomplete="name" />
+            <div class="help">Used on your report and email.</div>
+            <div class="error" data-error-for="fullName" aria-live="polite">Please enter your name.</div>
+          </div>
+          <div>
+            <label for="email">Email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+            <div class="help">We’ll send confirmations and your PDF here.</div>
+            <div class="error" data-error-for="email" aria-live="polite">Please enter a valid email.</div>
+          </div>
+          <div>
+            <label for="role">Role / Title</label>
+            <input id="role" name="role" type="text" placeholder="e.g., Product Manager, Founder" autocomplete="organization-title" />
+            <div class="help">Gives context to how your profile should signal credibility.</div>
+          </div>
+          <div>
+            <label for="location">Location</label>
+            <input id="location" name="location" type="text" placeholder="City, Country" autocomplete="address-level2" />
+            <div class="help">Useful for region-specific opportunities and media.</div>
+          </div>
         </div>
-        <div>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required />
+      </section>
+
+      <!-- STEP 2: Presence -->
+      <section class="step" data-step="2" hidden aria-labelledby="s2-title">
+        <h2 class="visually-hidden" id="s2-title">Presence</h2>
+        <p class="step-info">Links let us quickly evaluate your current “first impression.”</p>
+        <div class="grid">
+          <div>
+            <label for="linkedin">LinkedIn URL <span class="req">*</span></label>
+            <input id="linkedin" name="linkedin" type="url" required placeholder="https://www.linkedin.com/in/yourprofile" />
+            <div class="help">This is the most-weighted public signal for most professionals.</div>
+            <div class="error" data-error-for="linkedin" aria-live="polite">Please enter a valid LinkedIn URL.</div>
+          </div>
+          <div class="grid two">
+            <div>
+              <label for="website">Website / Portfolio</label>
+              <input id="website" name="website" type="url" placeholder="https://…" />
+              <div class="help">Optional, but great if you have case studies or a portfolio.</div>
+            </div>
+            <div>
+              <label for="otherLinks">Other links (comma-separated)</label>
+              <input id="otherLinks" name="otherLinks" type="text" placeholder="Twitter, Medium, GitHub, press, etc." />
+              <div class="help">Anything else that represents you publicly.</div>
+            </div>
+          </div>
+          <div>
+            <label for="presenceNotes">Anything we should know about your online presence?</label>
+            <textarea id="presenceNotes" name="presenceNotes" maxlength="500" placeholder="e.g., old blogs, a name change, duplicate profiles, previous PR, etc."></textarea>
+            <div class="char-count" data-count-for="presenceNotes">0 / 500</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3: Goals -->
+      <section class="step" data-step="3" hidden aria-labelledby="s3-title">
+        <h2 class="visually-hidden" id="s3-title">Goals</h2>
+        <p class="step-info">Your goals shape the audit score, recommendations, and quick wins.</p>
+        <div class="grid">
+          <div>
+            <label for="primaryGoal">Primary goal for this audit <span class="req">*</span></label>
+            <select id="primaryGoal" name="primaryGoal" required>
+              <option value="">Select one…</option>
+              <option>Credibility for recruiters</option>
+              <option>Client trust & lead quality</option>
+              <option>Thought leadership positioning</option>
+              <option>Visa / global talent narrative</option>
+              <option>Other</option>
+            </select>
+            <div class="help">We’ll bias the recommendations toward this outcome.</div>
+            <div class="error" data-error-for="primaryGoal" aria-live="polite">Please select your primary goal.</div>
+          </div>
+          <div>
+            <label for="successLook">In one sentence, what does success look like in 90 days?</label>
+            <textarea id="successLook" name="successLook" maxlength="200" placeholder="e.g., 3 recruiter calls/week without cold outreach"></textarea>
+            <div class="char-count" data-count-for="successLook">0 / 200</div>
+          </div>
+          <div>
+            <label for="biggestBlock">What’s the biggest current blocker?</label>
+            <textarea id="biggestBlock" name="biggestBlock" maxlength="240" placeholder="e.g., unclear story; scattered online footprint"></textarea>
+            <div class="char-count" data-count-for="biggestBlock">0 / 240</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4: Evidence -->
+      <section class="step" data-step="4" hidden aria-labelledby="s4-title">
+        <h2 class="visually-hidden" id="s4-title">Evidence</h2>
+        <p class="step-info">Wins and proof links strengthen your narrative and score.</p>
+        <div class="grid">
+          <div class="grid two">
+            <div>
+              <label for="yearsExp">Years of experience</label>
+              <input id="yearsExp" name="yearsExp" type="number" min="0" max="60" />
+            </div>
+            <div>
+              <label for="industry">Industry / Domain</label>
+              <input id="industry" name="industry" type="text" placeholder="e.g., Supply Chain, VFX, SaaS" />
+            </div>
+          </div>
+          <div>
+            <label for="topWins">Top 3 wins / achievements (bullet list)</label>
+            <textarea id="topWins" name="topWins" maxlength="600" placeholder="• TOI feature on X&#10;• Shipped Y impacting 500k users&#10;• Led Z initiative with measurable results"></textarea>
+            <div class="char-count" data-count-for="topWins">0 / 600</div>
+          </div>
+          <div>
+            <label for="proofLinks">Proof links (press, talks, decks, case studies)</label>
+            <textarea id="proofLinks" name="proofLinks" maxlength="600" placeholder="Paste URLs on new lines"></textarea>
+            <div class="char-count" data-count-for="proofLinks">0 / 600</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 5: Preferences -->
+      <section class="step" data-step="5" hidden aria-labelledby="s5-title">
+        <h2 class="visually-hidden" id="s5-title">Preferences</h2>
+        <p class="step-info">Tell us how you prefer your recommendations.</p>
+        <div class="grid">
+          <div class="grid two">
+            <div>
+              <label for="tone">Preferred tone of recommendations</label>
+              <select id="tone" name="tone">
+                <option value="">No preference</option>
+                <option>Direct & no-fluff</option>
+                <option>Friendly & supportive</option>
+                <option>Data-heavy & formal</option>
+              </select>
+            </div>
+            <div>
+              <label for="constraints">Constraints (time, budget, privacy)</label>
+              <input id="constraints" name="constraints" type="text" placeholder="Anything we should consider while recommending" />
+            </div>
+          </div>
+          <div>
+            <label for="extras">Anything else we should know?</label>
+            <textarea id="extras" name="extras" maxlength="400" placeholder="Context that helps us tailor the audit"></textarea>
+            <div class="char-count" data-count-for="extras">0 / 400</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 6: Confirm -->
+      <section class="step" data-step="6" hidden aria-labelledby="s6-title">
+        <h2 class="visually-hidden" id="s6-title">Confirm</h2>
+        <p class="step-info">Final check before we generate your payment page.</p>
+        <div class="grid">
+          <div class="banner">
+            <strong>Almost there.</strong> Review your details. When you submit, you’ll be redirected to the payment page to complete your order.
+          </div>
+          <div class="notice">By submitting, you agree to receive your personalized audit PDF and recommendations within 5 business days. You’ll get an email confirmation immediately.</div>
+          <div class="grid two">
+            <div>
+              <label><input type="checkbox" id="consent" name="consent" required> I confirm the details are accurate. <span class="req">*</span></label>
+              <div class="error" data-error-for="consent" aria-live="polite">Please confirm before submitting.</div>
+            </div>
+            <div>
+              <label><input type="checkbox" id="privacy" name="privacy" required> I accept the privacy terms. <span class="req">*</span></label>
+              <div class="error" data-error-for="privacy" aria-live="polite">Please accept to continue.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sticky Nav -->
+      <div class="nav" role="region" aria-label="Form navigation">
+        <div class="nav-inner">
+          <button type="button" class="btn secondary" id="prevBtn">Back</button>
+          <div class="notice" id="progressNote" aria-live="polite">Step 1 of 6</div>
+          <button type="button" class="btn" id="nextBtn">Continue</button>
         </div>
       </div>
 
-      <div class="row two">
-        <div>
-          <label for="role">Role / Job Title</label>
-          <input id="role" name="role" type="text" />
-        </div>
-        <div>
-          <label for="industry">Industry</label>
-          <input id="industry" name="industry" type="text" />
-        </div>
+      <!-- Hidden fields for UTMs/referrer -->
+      <input type="hidden" name="utm_source" id="utm_source">
+      <input type="hidden" name="utm_medium" id="utm_medium">
+      <input type="hidden" name="utm_campaign" id="utm_campaign">
+      <input type="hidden" name="referrer" id="referrer">
+
+      <!-- Honeypot -->
+      <div class="hp" aria-hidden="true">
+        <label>Leave this field empty
+          <input type="text" name="company_website" tabindex="-1" autocomplete="off">
+        </label>
       </div>
 
-      <div class="row two">
-        <div>
-          <label for="experience">Years of Experience</label>
-          <input id="experience" name="experience" type="text" />
-        </div>
-        <div>
-          <label for="location">Location</label>
-          <input id="location" name="location" type="text" />
-        </div>
-      </div>
-
-      <label for="linkedin">LinkedIn URL</label>
-      <input id="linkedin" name="linkedin" type="url" placeholder="https://www.linkedin.com/in/..." />
-
-      <label for="resume">Resume Highlights (paste or brief)</label>
-      <textarea id="resume" name="resume"></textarea>
-
-      <label for="site">Personal Website / Portfolio</label>
-      <input id="site" name="site" type="url" placeholder="https://..." />
-
-      <label for="social">Other Social Links</label>
-      <input id="social" name="social" type="text" placeholder="Instagram, X, YouTube, etc." />
-
-      <label for="goals">Goals for Audit</label>
-      <textarea id="goals" name="goals"></textarea>
-
-      <label for="vision">Future Vision (2–3 years)</label>
-      <textarea id="vision" name="vision"></textarea>
-
-      <label for="wins">Top Wins / Achievements</label>
-      <textarea id="wins" name="wins"></textarea>
-
-      <label for="inspo">Inspiration / Competitors</label>
-      <textarea id="inspo" name="inspiration_competitors"></textarea>
-
-      <!-- Optional hidden field for subject/tagging in Formspree -->
-      <input type="hidden" name="_subject" value="Perception Audit Intake" />
-
-      <div class="submit-wrap">
-        <button id="submitBtn" type="submit" class="submit-btn">Submit & Continue to Payment</button>
-        <div class="fine">By continuing you agree to our Privacy & Terms.</div>
-      </div>
+      <!-- Save toast -->
+      <div id="saveToast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden>Saved ✓</div>
     </form>
-
-    <footer>© The Perception Studio • Private & Confidential</footer>
   </div>
 
   <script>
-  (function(){
-    const form = document.getElementById('auditForm');
-    const btn  = document.getElementById('submitBtn');
+    // === CONFIG ===
+    const FORM_ID = 'auditForm';
+    const STORAGE_KEY = 'tps_perception_audit_v1';
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwprkoob'; // your Formspree endpoint
+    const PAYMENT_URL = 'https://rzp.io/rzp/vjYWLN7'; // your Razorpay payment link
 
-    form.addEventListener('submit', async function(e){
-      e.preventDefault();
-      btn.disabled = true; 
-      btn.textContent = 'Submitting...';
+    // === ELEMENTS ===
+    const form = document.getElementById(FORM_ID);
+    const steps = Array.from(document.querySelectorAll('.step'));
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressFill = document.getElementById('progressFill');
+    const stepLabels = Array.from(document.querySelectorAll('#stepLabels span'));
+    const progressNote = document.getElementById('progressNote');
 
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-        if(!res.ok) throw new Error('Submit failed');
-        
-        // ✅ Redirect directly to Razorpay payment link
-        window.location.href = 'https://rzp.io/rzp/vjYWLN7';
-      } catch(err){
-        alert('Could not submit form. Please check your internet and try again.');
-        btn.disabled = false; 
-        btn.textContent = 'Submit & Continue to Payment';
+    let current = 0; // index 0..5
+    const nextStepNames = ['Presence','Goals','Evidence','Preferences','Confirm','Payment'];
+
+    function showStep(index) {
+      steps.forEach((s, i) => { s.hidden = i !== index; });
+      stepLabels.forEach((l, i) => { l.classList.toggle('active', i === index); });
+      prevBtn.disabled = index === 0;
+
+      const isLast = index === steps.length - 1;
+      nextBtn.textContent = isLast ? 'Submit & Continue to Payment' : `Continue to ${nextStepNames[index]}`;
+
+      const pct = ((index + 1) / steps.length) * 100;
+      progressFill.style.width = pct + '%';
+      progressNote.textContent = `Step ${index + 1} of ${steps.length}`;
+      current = index;
+
+      setTimeout(() => {
+        const firstInput = steps[index].querySelector('input, select, textarea, button');
+        if (firstInput) firstInput.focus({preventScroll:true});
+      }, 0);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function looksLikeLinkedIn(url){
+      try { const u = new URL(url.trim()); return u.hostname.includes('linkedin.com'); }
+      catch { return false; }
+    }
+
+    function validateStep(index) {
+      const section = steps[index];
+      let valid = true;
+      let firstInvalid = null;
+
+      section.querySelectorAll('[required]').forEach(el => {
+        let ok = true;
+        if (el.type === 'checkbox') {
+          ok = el.checked;
+        } else if (el.type === 'email') {
+          ok = /\S+@\S+\.\S+/.test(el.value.trim());
+        } else if (el.tagName === 'SELECT') {
+          ok = el.value.trim() !== '';
+        } else if (el.id === 'linkedin') {
+          ok = looksLikeLinkedIn(el.value);
+        } else {
+          ok = el.value.trim() !== '';
+        }
+        const err = form.querySelector(`[data-error-for="${el.id}"]`);
+        if (err) err.style.display = ok ? 'none' : 'block';
+        if (!ok) { valid = false; if (!firstInvalid) firstInvalid = el; }
+      });
+
+      if (firstInvalid) firstInvalid.focus();
+      return valid;
+    }
+
+    function saveDraft() {
+      const data = new FormData(form);
+      const obj = {};
+      data.forEach((v, k) => obj[k] = v);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+
+      const t = document.getElementById('saveToast');
+      if (t){
+        t.hidden = false;
+        clearTimeout(window.__saveT);
+        window.__saveT = setTimeout(()=> t.hidden = true, 1200);
+      }
+    }
+
+    function loadDraft() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      const obj = JSON.parse(saved);
+      Object.keys(obj).forEach(k => {
+        const el = form.elements[k];
+        if (!el) return;
+        if (el.type === 'checkbox') el.checked = obj[k] === 'on' || obj[k] === true;
+        else el.value = obj[k];
+      });
+    }
+
+    function updateCharCounts() {
+      document.querySelectorAll('[data-count-for]').forEach(span => {
+        const id = span.getAttribute('data-count-for');
+        const el = document.getElementById(id);
+        if (!el) return;
+        const max = Number(el.getAttribute('maxlength'));
+        const len = el.value.length;
+        span.textContent = `${len} / ${max}`;
+        span.classList.toggle('warn', max && len >= Math.floor(max * 0.9));
+      });
+    }
+
+    nextBtn.addEventListener('click', async () => {
+      if (!validateStep(current)) return;
+
+      if (current === steps.length - 1) {
+        if (form.elements['company_website']?.value) return;
+
+        try {
+          nextBtn.disabled = true; prevBtn.disabled = true; nextBtn.textContent = 'Submitting…';
+          const fd = new FormData(form);
+          fd.append('currentStep', String(current + 1));
+
+          document.getElementById('submitted_at').value = new Date().toISOString();
+          document.getElementById('page_url').value = location.href;
+
+          const res = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            body: fd,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (!res.ok) throw new Error('Submission failed');
+          localStorage.removeItem(STORAGE_KEY);
+          window.location.href = PAYMENT_URL;
+        } catch (e) {
+          alert('Something went wrong. Please try again, or email us at hello@theperception.studio');
+          nextBtn.disabled = false; prevBtn.disabled = current === 0; nextBtn.textContent = 'Submit & Continue to Payment';
+        }
+        return;
+      }
+
+      showStep(current + 1);
+    });
+
+    prevBtn.addEventListener('click', () => showStep(Math.max(0, current - 1)));
+
+    form.addEventListener('input', () => { saveDraft(); updateCharCounts(); });
+    form.addEventListener('change', () => { saveDraft(); updateCharCounts(); });
+
+    form.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && current < steps.length - 1) {
+        e.preventDefault();
+        nextBtn.click();
       }
     });
-  })();
-</script>
 
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('utm_source').value = params.get('utm_source') || '';
+    document.getElementById('utm_medium').value = params.get('utm_medium') || '';
+    document.getElementById('utm_campaign').value = params.get('utm_campaign') || '';
+    document.getElementById('referrer').value = document.referrer || '';
+
+    loadDraft();
+    updateCharCounts();
+    showStep(0);
+  </script>
 </body>
 </html>
-
-
