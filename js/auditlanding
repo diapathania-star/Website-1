@@ -1,0 +1,25 @@
+// Mobile nav (optional if you add CSS to hide/show)
+document.querySelector('.nav-toggle')?.addEventListener('click', function () {
+  const nav = document.querySelector('[data-nav]');
+  const expanded = this.getAttribute('aria-expanded') === 'true';
+  this.setAttribute('aria-expanded', String(!expanded));
+  nav?.classList.toggle('open');
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    // close others (optional)
+    document.querySelectorAll('.faq-item').forEach(i => {
+      if (i !== item) {
+        i.classList.remove('open');
+        i.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+    // toggle current
+    item.classList.toggle('open', !expanded);
+    btn.setAttribute('aria-expanded', String(!expanded));
+  });
+});
