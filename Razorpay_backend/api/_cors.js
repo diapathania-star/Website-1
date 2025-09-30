@@ -1,23 +1,21 @@
 export function applyCORS(req, res) {
-  // Allow one or more origins via env (comma-separated)
-  const allowedList = (process.env.ALLOW_ORIGIN || '*')
+  // 1) Which origin to allow
+  const allowed = (process.env.ALLOW_ORIGIN || '*')
     .split(',')
     .map(s => s.trim());
-
-  const requestOrigin = req.headers.origin;
-  const isAllowed =
-    allowedList.includes('*') ||
-    (requestOrigin && allowedList.includes(requestOrigin));
-
-  // Echo back the request origin when allowed (best practice)
-  res.setHeader('Access-Control-Allow-Origin', isAllowed && requestOrigin ? requestOrigin : allowedList[0] || '*');
+  const origin = req.headers.origin;
+  const ok = allowed.includes('*') || (origin && allowed.includes(origin));
+  res.setHeader('Access-Control-Allow-Origin', ok && origin ? origin : allowed[0] || '*');
   res.setHeader('Vary', 'Origin');
 
-  // Preflight allowances
+  // 2) Methods
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-  // IMPORTANT: include Accept (browser sends it automatically)
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
-  // Optional: cache preflight
+
+  // 3) Headers: echo back exactly what the browser asks for
+  const reqHeaders = req.headers['access-control-request-headers'];
+  res.setHeader('Access-Control-Allow-Headers', reqHeaders || 'Content-Type, Accept');
+
+  // 4) (Optional) cache the preflight for a day
   res.setHeader('Access-Control-Max-Age', '86400');
 
   if (req.method === 'OPTIONS') {
