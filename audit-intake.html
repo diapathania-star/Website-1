@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <!-- Styles -->
-  <link rel="stylesheet" href="css/audit-intake.css">
+  <link rel="stylesheet" href="audit-intake.css">
 </head>
 <body>
   <div class="container">
@@ -182,7 +182,7 @@
         <p class="step-info">Final check before we generate your payment page.</p>
         <div class="grid">
           <div class="banner">
-            <strong>Almost there.</strong> Review your details. When you submit, you’ll be redirected to the payment page to complete your order.
+            <strong>Almost there.</strong> Review your details. When you submit, you’ll be taken to secure checkout to complete your order.
           </div>
           <div class="notice">By submitting, you agree to receive your personalized audit PDF and recommendations. You’ll get an email confirmation immediately.</div>
           <div>
@@ -200,7 +200,7 @@
         <div class="nav-inner">
           <button type="button" class="btn secondary" id="prevBtn">Back</button>
           <div class="notice" id="progressNote" aria-live="polite">Step 1 of 6</div>
-          <button type="button" class="btn" id="nextBtn">Continue</button>
+          <button type="button" class="btn" id="nextBtn">Submit & Continue to Payment</button>
         </div>
       </div>
 
@@ -222,14 +222,19 @@
     </form>
   </div>
 
+  <!-- Razorpay checkout -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
   <script>
     /* ======================
-       CONFIG
+       CONFIG (CHANGEME)
     ====================== */
     const FORM_ID = 'auditForm';
     const STORAGE_KEY = 'tps_perception_audit_v1';
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwprkoob'; // << keep / replace with yours
-    const PAYMENT_URL = 'https://rzp.io/rzp/HjUWXlu';             // << your Razorpay Payment Page
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwprkoob'; // keep / replace
+    const BACKEND_BASE = "https://website-1-nk0avy36a-diyas-projects-6e4f060f.vercel.app";
+const RAZORPAY_KEY_ID = "rzp_test_RNmQ57vBtpoaLv"; // your Test Key ID
+    const PRICE_PAISE = 19900;                                     // ₹499 in paise
 
     /* ======================
        ELEMENTS
@@ -249,20 +254,16 @@
       steps.forEach((s, i) => { s.hidden = i !== index; });
       stepLabels.forEach((l, i) => { l.classList.toggle('active', i === index); });
       prevBtn.disabled = index === 0;
-
       const isLast = index === steps.length - 1;
       nextBtn.textContent = isLast ? 'Submit & Continue to Payment' : `Continue to ${nextStepNames[index]}`;
-
       const pct = ((index + 1) / steps.length) * 100;
       progressFill.style.width = pct + '%';
       progressNote.textContent = `Step ${index + 1} of ${steps.length}`;
       current = index;
-
       setTimeout(() => {
         const firstInput = steps[index].querySelector('input, select, textarea, button');
         if (firstInput) firstInput.focus({preventScroll:true});
       }, 0);
-
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -303,7 +304,6 @@
       const obj = {};
       data.forEach((v, k) => obj[k] = v);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
-
       const t = document.getElementById('saveToast');
       if (t){
         t.hidden = false;
@@ -339,44 +339,76 @@
     nextBtn.addEventListener('click', async () => {
       if (!validateStep(current)) return;
 
-      // Final step → submit + redirect to payment
+      // Final step → send intake + create Razorpay Order + open Checkout
       if (current === steps.length - 1) {
-        // Bot honeypot
-        if (form.elements['company_website']?.value) return;
+        if (form.elements['company_website']?.value) return; // honeypot
 
         try {
           nextBtn.disabled = true; prevBtn.disabled = true; nextBtn.textContent = 'Submitting…';
+
+          // Fire-and-forget: store intake
           const fd = new FormData(form);
           fd.append('currentStep', String(current + 1));
-
           document.getElementById('submitted_at').value = new Date().toISOString();
           document.getElementById('page_url').value = location.href;
+          fetch(FORMSPREE_ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } }).catch(()=>{});
 
-          // Fire-and-forget to Formspree — do not block payment redirect
-          let ok = false;
-          try {
-            const res = await fetch(FORMSPREE_ENDPOINT, {
-              method: 'POST',
-              body: fd,
-              headers: { 'Accept': 'application/json' }
-            });
-            ok = res.ok;
-            if (!ok) console.warn('Formspree non-200, continuing to payment…');
-          } catch (err) {
-            console.warn('Formspree error, continuing to payment…', err);
-          }
+          // Create ORDER on backend
+          const orderRes = await fetch(`${BACKEND_BASE}/api/orders`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              amount: PRICE_PAISE,
+              currency: 'INR',
+              notes: {
+                product: 'Perception Audit',
+                fullName: form.fullName.value,
+                email: form.email.value,
+                utm_source: document.getElementById('utm_source').value || '',
+                utm_medium: document.getElementById('utm_medium').value || '',
+                utm_campaign: document.getElementById('utm_campaign').value || '',
+                referrer: document.getElementById('referrer').value || ''
+              }
+            })
+          });
+          const order = await orderRes.json();
+          if (!order.id) throw new Error(order.error || 'Could not create order');
 
-          localStorage.removeItem(STORAGE_KEY);
+          // Open Razorpay Checkout
+          const rzp = new Razorpay({
+            key: RAZORPAY_KEY_ID,
+            order_id: order.id, // IMPORTANT
+            name: "The Perception Studio",
+            description: "Perception Audit",
+            prefill: { name: form.fullName.value, email: form.email.value },
+            theme: { color: "#2E3B32" },
+            handler: async function (resp) {
+              try {
+                const v = await fetch(`${BACKEND_BASE}/api/verify`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(resp)
+                });
+                // We consider both OK and non-OK → show success page; your backend/webhook will finalize.
+                window.location.href = "success.html?pid=" + encodeURIComponent(resp.razorpay_payment_id);
+              } catch {
+                window.location.href = "success.html";
+              }
+            },
+            modal: {
+              ondismiss: function () {
+                nextBtn.disabled = false; prevBtn.disabled = false;
+                nextBtn.textContent = 'Submit & Continue to Payment';
+              }
+            }
+          });
 
-          console.log('Redirecting to:', PAYMENT_URL, 'Formspree ok?', ok);
-          // Robust redirect (3 fallbacks)
-          window.location.href = PAYMENT_URL;
-          setTimeout(() => window.location.assign(PAYMENT_URL), 50);
-          setTimeout(() => window.location.replace(PAYMENT_URL), 200);
+          rzp.open();
         } catch (e) {
           console.error(e);
-          // As a last resort, still send them to pay
-          window.location.href = PAYMENT_URL;
+          alert('Could not start payment. Please try again.');
+          nextBtn.disabled = false; prevBtn.disabled = false;
+          nextBtn.textContent = 'Submit & Continue to Payment';
         }
         return;
       }
@@ -385,14 +417,11 @@
     });
 
     prevBtn.addEventListener('click', () => showStep(Math.max(0, current - 1)));
-
     form.addEventListener('input', () => { saveDraft(); updateCharCounts(); });
     form.addEventListener('change', () => { saveDraft(); updateCharCounts(); });
-
     form.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && current < steps.length - 1) {
-        e.preventDefault();
-        nextBtn.click();
+        e.preventDefault(); nextBtn.click();
       }
     });
 
