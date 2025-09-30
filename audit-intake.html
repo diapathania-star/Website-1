@@ -232,9 +232,12 @@
     const FORM_ID = 'auditForm';
     const STORAGE_KEY = 'tps_perception_audit_v1';
     const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwprkoob'; // keep / replace
-    const BACKEND_BASE = "https://website-1-pi-liard.vercel.app";
-    const RAZORPAY_KEY_ID = "rzp_test_RNmQ57vBtpoaLv"; // your Test Key ID
-    const PRICE_PAISE = 19900;                                     // ₹499 in paise
+    const BACKEND_BASE = "https://website-1-pi-liard.vercel.app"; // no trailing slash
+    const RAZORPAY_KEY_ID = "rzp_test_RNmQ57vBtpoaLv"; // Test Key ID
+    const PRICE_PAISE = 19900; // ₹199 in paise
+
+    // guard to prevent opening multiple Razorpay windows
+    let CHECKOUT_OPEN = false;
 
     /* ======================
        ELEMENTS
@@ -353,69 +356,73 @@
           document.getElementById('page_url').value = location.href;
           fetch(FORMSPREE_ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } }).catch(()=>{});
 
-          //// Create ORDER on backend
-const ordersUrl = new URL('/api/orders', BACKEND_BASE);
-const orderRes = await fetch(ordersUrl.toString(), {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  },
-  body: JSON.stringify({
-    amount: PRICE_PAISE,
-    currency: 'INR',
-    notes: {
-      product: 'Perception Audit',
-      fullName: form.fullName.value,
-      email: form.email.value,
-      utm_source: document.getElementById('utm_source').value || '',
-      utm_medium: document.getElementById('utm_medium').value || '',
-      utm_campaign: document.getElementById('utm_campaign').value || '',
-      referrer: document.getElementById('referrer').value || ''
-    }
-  })
-});
+          // Create ORDER on backend (safe URL build)
+          const ordersUrl = new URL('/api/orders', BACKEND_BASE);
+          const orderRes = await fetch(ordersUrl.toString(), {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              amount: PRICE_PAISE,
+              currency: 'INR',
+              notes: {
+                product: 'Perception Audit',
+                fullName: form.fullName.value,
+                email: form.email.value,
+                utm_source: document.getElementById('utm_source').value || '',
+                utm_medium: document.getElementById('utm_medium').value || '',
+                utm_campaign: document.getElementById('utm_campaign').value || '',
+                referrer: document.getElementById('referrer').value || ''
+              }
+            })
+          });
 
-if (!orderRes.ok) {
-  const txt = await orderRes.text().catch(() => '');
-  throw new Error(`Order API failed (${orderRes.status}): ${txt}`);
-}
+          if (!orderRes.ok) {
+            const txt = await orderRes.text().catch(() => '');
+            throw new Error(`Order API failed (${orderRes.status}): ${txt}`);
+          }
 
-const order = await orderRes.json();
-if (!order.id) throw new Error(order.error || 'Order JSON missing id');
+          const order = await orderRes.json();
+          if (!order.id) throw new Error(order.error || 'Order JSON missing id');
 
-// Open Razorpay Checkout
-const rzp = new Razorpay({
-  key: RAZORPAY_KEY_ID,
-  order_id: order.id, // IMPORTANT
-  name: "The Perception Studio",
-  description: "Perception Audit",
-  prefill: { name: form.fullName.value, email: form.email.value },
-  theme: { color: "#2E3B32" },
-  handler: async function (resp) {
-    try {
-      const verifyUrl = new URL('/api/verify', BACKEND_BASE);
-      await fetch(verifyUrl.toString(), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(resp)
-      });
-      window.location.href = "success.html?pid=" + encodeURIComponent(resp.razorpay_payment_id);
-    } catch {
-      window.location.href = "success.html";
-    }
-  },
-  modal: {
-    ondismiss: function () {
-      nextBtn.disabled = false; 
-      prevBtn.disabled = false;
-      nextBtn.textContent = 'Submit & Continue to Payment';
-    }
-  }
-});
+          // ----- open Razorpay (guard against duplicates) -----
+          if (CHECKOUT_OPEN) return;
+          CHECKOUT_OPEN = true;
+
+          const rzp = new Razorpay({
+            key: RAZORPAY_KEY_ID,
+            order_id: order.id, // IMPORTANT
+            name: "The Perception Studio",
+            description: "Perception Audit",
+            prefill: { name: form.fullName.value, email: form.email.value },
+            theme: { color: "#2E3B32" },
+            handler: async function (resp) {
+              try {
+                const verifyUrl = new URL('/api/verify', BACKEND_BASE);
+                await fetch(verifyUrl.toString(), {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                  },
+                  body: JSON.stringify(resp)
+                });
+              } finally {
+                CHECKOUT_OPEN = false; // reset even if we redirect
+              }
+              window.location.href = "success.html?pid=" + encodeURIComponent(resp.razorpay_payment_id);
+            },
+            modal: {
+              ondismiss: function () {
+                CHECKOUT_OPEN = false;
+                nextBtn.disabled = false;
+                prevBtn.disabled = false;
+                nextBtn.textContent = 'Submit & Continue to Payment';
+              }
+            }
+          });
 
           rzp.open();
         } catch (e) {
@@ -423,6 +430,7 @@ const rzp = new Razorpay({
           alert('Could not start payment. Please try again.');
           nextBtn.disabled = false; prevBtn.disabled = false;
           nextBtn.textContent = 'Submit & Continue to Payment';
+          CHECKOUT_OPEN = false;
         }
         return;
       }
@@ -451,6 +459,3 @@ const rzp = new Razorpay({
   </script>
 </body>
 </html>
-
-
-
